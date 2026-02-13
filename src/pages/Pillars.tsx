@@ -1,0 +1,120 @@
+import { pillarMeta, type PillarKey } from "@/data/dailyIntel";
+import { DollarSign, Building2, Globe, TrendingUp, Cpu, Target } from "lucide-react";
+
+const pillarIcons: Record<PillarKey, React.ElementType> = {
+  money: DollarSign,
+  power: Building2,
+  world: Globe,
+  career: TrendingUp,
+  tech: Cpu,
+  self: Target,
+};
+
+const pillarColors: Record<PillarKey, string> = {
+  money: "pillar-indicator-money",
+  power: "pillar-indicator-power",
+  world: "pillar-indicator-world",
+  career: "pillar-indicator-career",
+  tech: "pillar-indicator-tech",
+  self: "pillar-indicator-self",
+};
+
+const pillarDescriptions: Record<PillarKey, string[]> = {
+  money: [
+    "How monetary systems function and who they serve",
+    "Capital vs labor dynamics and wealth transfer mechanisms",
+    "Inflation, credit cycles, and asset class behavior",
+    "Risk, optionality, and the mathematics of compounding",
+    "Personal wealth architecture: assets, income streams, risk exposure",
+  ],
+  power: [
+    "How institutions behave under constraints",
+    "Regulatory capture as equilibrium, not exception",
+    "Political economy and elite coalition management",
+    "Power concentration in platforms and capital markets",
+    "Gap between public narratives and operative incentives",
+  ],
+  world: [
+    "Interpreting global events through incentive structures",
+    "Geopolitical shifts and supply chain power maps",
+    "Institutional strategy behind headlines",
+    "Second-order consequences of policy changes",
+    "Detecting narrative framing across regional perspectives",
+  ],
+  career: [
+    "Career capital accumulation and leverage points",
+    "High-leverage skill combinations vs credential stacking",
+    "Optionality mapping across institutional and entrepreneurial paths",
+    "Prestige traps and the cost of legibility",
+    "Network strategy and positioning in nascent markets",
+  ],
+  tech: [
+    "AI deployment realities vs hype cycles",
+    "Compute constraints and energy infrastructure",
+    "Regulatory fragmentation: EU AI Act, US executive orders, China's approach",
+    "Open vs closed ecosystem incentives",
+    "Ethics as governance architecture, not sentiment",
+  ],
+  self: [
+    "Identity-based discipline over willpower",
+    "Energy management and environmental design",
+    "10-year time horizons as competitive advantage",
+    "Standards in relationships and environments",
+    "Compounding applied beyond finance",
+  ],
+};
+
+const Pillars = () => {
+  const keys = Object.keys(pillarMeta) as PillarKey[];
+
+  return (
+    <div>
+      <div className="mb-10">
+        <p className="font-mono text-xs tracking-widest uppercase text-gold mb-2">
+          System Architecture
+        </p>
+        <h1 className="text-3xl sm:text-4xl font-serif mb-2">The Six Pillars</h1>
+        <p className="text-sm text-muted-foreground max-w-2xl">
+          Structured education across the domains that determine agency, leverage, and
+          independent judgment.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {keys.map((key, i) => {
+          const meta = pillarMeta[key];
+          const Icon = pillarIcons[key];
+          const items = pillarDescriptions[key];
+
+          return (
+            <div
+              key={key}
+              className="border border-border rounded-lg bg-card p-6 opacity-0 animate-fade-in hover:border-gold-dim transition-colors"
+              style={{ animationDelay: `${i * 80}ms` }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className={`w-8 h-8 rounded flex items-center justify-center ${pillarColors[key]}/20`}>
+                  <Icon className="w-4 h-4 text-foreground" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-lg leading-tight">{meta.label}</h3>
+                  <p className="text-xs text-muted-foreground">{meta.subtitle}</p>
+                </div>
+              </div>
+              <ul className="space-y-2">
+                {items.map((item, j) => (
+                  <li key={j} className="flex items-start gap-2 text-sm text-foreground/70">
+                    <span className="text-gold mt-1 text-xs">▸</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default Pillars;
