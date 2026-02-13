@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 import { aiUpdates, type AIUpdate } from "@/data/aiUpdates";
-import { ExternalLink, Zap, Wrench, GraduationCap, BarChart3 } from "lucide-react";
+import { ExternalLink, Zap, Wrench, GraduationCap, BarChart3, ArrowRight } from "lucide-react";
 
 const categoryConfig: Record<AIUpdate["category"], { label: string; icon: React.ElementType }> = {
   model: { label: "New Model", icon: Zap },
@@ -19,6 +20,7 @@ const platformLabel: Record<string, string> = {
 };
 
 const AIUpdates = () => {
+  const navigate = useNavigate();
   const [filter, setFilter] = useState<AIUpdate["category"] | "all">("all");
 
   const filtered = filter === "all" ? aiUpdates : aiUpdates.filter((u) => u.category === filter);
@@ -69,7 +71,8 @@ const AIUpdates = () => {
           return (
             <article
               key={update.id}
-              className="border border-border rounded bg-card p-6 opacity-0 animate-fade-in hover:border-champagne-dim/40 transition-colors"
+              onClick={update.tutorialContent ? () => navigate(`/ai-updates/${update.id}`) : undefined}
+              className={`border border-border rounded bg-card p-6 opacity-0 animate-fade-in hover:border-champagne-dim/40 transition-colors ${update.tutorialContent ? "cursor-pointer" : ""}`}
               style={{ animationDelay: `${i * 80}ms` }}
             >
               <div className="flex items-start justify-between gap-4 mb-4">
@@ -120,6 +123,15 @@ const AIUpdates = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Tutorial CTA */}
+              {update.tutorialContent && (
+                <div className="border-t border-border pt-4 mt-4">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-champagne hover:text-champagne-dim transition-colors">
+                    Read full tutorial <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
+              )}
             </article>
           );
         })}

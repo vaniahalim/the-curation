@@ -1,3 +1,8 @@
+export interface TutorialStep {
+  title: string;
+  content: string;
+}
+
 export interface AIUpdate {
   id: string;
   category: "model" | "tool" | "tutorial" | "analysis";
@@ -6,6 +11,13 @@ export interface AIUpdate {
   sources: { label: string; url: string; platform: "x" | "substack" | "blog" | "paper" | "youtube" }[];
   date: string;
   tags: string[];
+  /** Tutorial-specific fields */
+  tutorialContent?: {
+    introduction: string;
+    steps: TutorialStep[];
+    videoUrl?: string;
+    conclusion: string;
+  };
 }
 
 export const aiUpdates: AIUpdate[] = [
@@ -49,6 +61,33 @@ export const aiUpdates: AIUpdate[] = [
     ],
     date: "2026-02-10",
     tags: ["agents", "architecture", "tutorials"],
+    tutorialContent: {
+      introduction: "Agentic AI represents a paradigm shift from simple prompt-response patterns to autonomous, multi-step reasoning systems. This tutorial walks through building production-grade agentic workflows — from basic function calling to fully autonomous planning loops with evaluation guardrails.",
+      videoUrl: "https://www.youtube.com/watch?v=sal78ACtGTc",
+      steps: [
+        {
+          title: "Master Function Calling Fundamentals",
+          content: "Start with OpenAI or Anthropic's function calling API. Define clear tool schemas with descriptions, required parameters, and return types. The model learns to select and invoke tools based on context. Practice: build a simple agent that can search the web and summarize results."
+        },
+        {
+          title: "Add Retrieval-Augmented Generation (RAG)",
+          content: "Connect your agent to a vector database (Pinecone, Weaviate, or Supabase pgvector). Implement chunking strategies for your knowledge base. Key insight: retrieval quality determines agent quality — spend 80% of your time on chunking and embedding strategy, not on the agent logic."
+        },
+        {
+          title: "Introduce Planning Loops",
+          content: "Move from single-shot tool use to ReAct-style reasoning loops. The agent should: (1) observe the current state, (2) think about what to do next, (3) act using a tool, (4) observe the result. Implement a maximum iteration count to prevent infinite loops. Use structured output to enforce the observe-think-act cycle."
+        },
+        {
+          title: "Implement Multi-Agent Handoffs",
+          content: "Decompose complex tasks across specialized agents. A 'router' agent determines which specialist to invoke. Each specialist has a narrow scope and defined tools. Key pattern: use structured messages for handoffs so agents share context without losing information."
+        },
+        {
+          title: "Build Evaluation & Guardrails",
+          content: "This is where most teams fail. Implement: (1) output validators that check agent responses against schemas, (2) hallucination detectors that verify claims against retrieved sources, (3) cost monitors that track token usage per task, (4) human-in-the-loop checkpoints for high-stakes decisions. Without evaluation, your agent is a liability."
+        }
+      ],
+      conclusion: "The most important lesson: agentic systems fail silently. Unlike a broken API that returns an error, a bad agent returns confident-sounding nonsense. Build evaluation first, then build the agent. The teams that ship reliable agents are the ones that treat evaluation as a first-class citizen, not an afterthought."
+    }
   },
   {
     id: "4",
