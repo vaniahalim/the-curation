@@ -2,21 +2,14 @@ import { pillarMeta, type PillarKey } from "@/data/dailyIntel";
 import { DollarSign, Building2, Globe, TrendingUp, Cpu, Target } from "lucide-react";
 
 const pillarIcons: Record<PillarKey, React.ElementType> = {
-  money: DollarSign,
-  power: Building2,
-  world: Globe,
-  career: TrendingUp,
-  tech: Cpu,
-  self: Target,
+  money: DollarSign, power: Building2, world: Globe,
+  career: TrendingUp, tech: Cpu, self: Target,
 };
 
 const pillarColors: Record<PillarKey, string> = {
-  money: "pillar-indicator-money",
-  power: "pillar-indicator-power",
-  world: "pillar-indicator-world",
-  career: "pillar-indicator-career",
-  tech: "pillar-indicator-tech",
-  self: "pillar-indicator-self",
+  money: "pillar-indicator-money", power: "pillar-indicator-power",
+  world: "pillar-indicator-world", career: "pillar-indicator-career",
+  tech: "pillar-indicator-tech", self: "pillar-indicator-self",
 };
 
 const pillarDescriptions: Record<PillarKey, string[]> = {
@@ -69,11 +62,11 @@ const Pillars = () => {
 
   return (
     <div>
-      <div className="mb-10">
-        <p className="font-mono text-xs tracking-widest uppercase text-gold mb-2">
+      <div className="mb-12">
+        <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-champagne mb-3">
           System Architecture
         </p>
-        <h1 className="text-3xl sm:text-4xl font-serif mb-2">The Six Pillars</h1>
+        <h1 className="text-3xl sm:text-4xl font-serif mb-3">The Six Pillars</h1>
         <p className="text-sm text-muted-foreground max-w-2xl">
           Structured education across the domains that determine agency, leverage, and
           independent judgment.
@@ -89,12 +82,13 @@ const Pillars = () => {
           return (
             <div
               key={key}
-              className="border border-border rounded-lg bg-card p-6 opacity-0 animate-fade-in hover:border-gold-dim transition-colors"
+              className="border border-border rounded bg-card p-6 opacity-0 animate-fade-in hover:border-champagne-dim/40 transition-colors"
               style={{ animationDelay: `${i * 80}ms` }}
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className={`w-8 h-8 rounded flex items-center justify-center ${pillarColors[key]}/20`}>
-                  <Icon className="w-4 h-4 text-foreground" />
+                <div className="flex items-center gap-2">
+                  <div className={`w-2 h-2 rounded-full ${pillarColors[key]}`} />
+                  <Icon className="w-4 h-4 text-muted-foreground" />
                 </div>
                 <div>
                   <h3 className="font-serif text-lg leading-tight">{meta.label}</h3>
@@ -103,8 +97,8 @@ const Pillars = () => {
               </div>
               <ul className="space-y-2">
                 {items.map((item, j) => (
-                  <li key={j} className="flex items-start gap-2 text-sm text-foreground/70">
-                    <span className="text-gold mt-1 text-xs">▸</span>
+                  <li key={j} className="flex items-start gap-2 text-sm text-foreground/65">
+                    <span className="text-champagne mt-1 text-xs">▸</span>
                     {item}
                   </li>
                 ))}

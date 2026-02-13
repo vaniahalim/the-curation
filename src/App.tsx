@@ -7,6 +7,7 @@ import Layout from "@/components/Layout";
 import Index from "./pages/Index";
 import Pillars from "./pages/Pillars";
 import Library from "./pages/Library";
+import AIUpdates from "./pages/AIUpdates";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/pillars" element={<Pillars />} />
+            <Route path="/ai-updates" element={<AIUpdates />} />
             <Route path="/library" element={<Library />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
