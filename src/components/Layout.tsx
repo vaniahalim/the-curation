@@ -19,7 +19,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <Link to="/" className="flex items-center gap-2.5">
             <span className="text-champagne font-mono text-[10px] tracking-[0.3em] uppercase">▪</span>
             <span className="font-serif text-lg text-ivory tracking-tight">
-              Dangerously Educated
+              The Curation
             </span>
           </Link>
           <nav className="flex items-center gap-0.5">
