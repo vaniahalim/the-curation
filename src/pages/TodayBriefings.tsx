@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import { todayIntel, pillarMeta } from "@/data/dailyIntel";
 import IntelCard from "@/components/IntelCard";
 import { ArrowLeft, Zap } from "lucide-react";
+import { format } from "date-fns";
 
 const TodayBriefings = () => {
+  const today = format(new Date(), "EEEE, MMMM d, yyyy");
+
   return (
     <div>
       <div className="mb-12">
@@ -20,11 +23,8 @@ const TodayBriefings = () => {
             Daily Intelligence
           </p>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-serif mb-3">Today's Briefings</h1>
-        <p className="text-sm text-muted-foreground max-w-2xl">
-          Six strategic briefings across Money, Power, World, Career, Tech, and Self—updated daily
-          with curated sources and actionable insights.
-        </p>
+        <h1 className="text-3xl sm:text-4xl font-serif mb-2">Today's Briefings</h1>
+        <p className="text-sm text-muted-foreground font-mono tracking-wide">{today}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
