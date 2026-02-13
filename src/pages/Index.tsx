@@ -131,14 +131,21 @@ const Index = () => {
           <h2 className="text-2xl font-serif mb-4">Go Deeper</h2>
           <p className="text-sm text-muted-foreground mb-8">
             The curated library — books, podcasts, and documentaries with bias profiles,
-            reading lenses, and extracted key takeaways.
+            reading lenses, and extracted key takeaways.<br />
+            AI updates — emerging models, tools, and practical tutorials to stay ahead of the curve.
           </p>
-          <Link
-            to="/library"
-            className="inline-block bg-primary text-primary-foreground px-7 py-2.5 rounded text-sm font-medium hover:opacity-90 transition-opacity tracking-wide">
-
-            Browse the Library
-          </Link>
+          <div className="flex items-center justify-center gap-4">
+            <Link
+              to="/library"
+              className="inline-block bg-primary text-primary-foreground px-7 py-2.5 rounded text-sm font-medium hover:opacity-90 transition-opacity tracking-wide">
+              Browse the Library
+            </Link>
+            <Link
+              to="/ai-updates"
+              className="inline-block border border-border text-foreground/70 px-7 py-2.5 rounded text-sm font-medium hover:bg-secondary hover:text-foreground transition-colors tracking-wide">
+              AI Updates
+            </Link>
+          </div>
         </div>
       </section>
     </div>);
