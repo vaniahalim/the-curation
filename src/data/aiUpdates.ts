@@ -39,7 +39,7 @@ export const aiUpdates: AIUpdate[] = [
     id: "2",
     category: "tool",
     title: "Cursor, Windsurf, and the IDE Wars",
-    summary: "The AI-native IDE space is consolidating rapidly. Cursor's agent mode and Windsurf's contextual understanding represent two different philosophies: explicit tool use vs ambient intelligence. The meta-pattern: AI is being embedded into the tools professionals already use rather than requiring new workflows. This is how technology adoption actually happens — through infrastructure, not interfaces.",
+    summary: "The AI-native IDE space is consolidating rapidly. Cursor's agent mode and Windsurf's contextual understanding represent two different philosophies: explicit tool use vs ambient intelligence. The meta-pattern: AI is being embedded into the tools professionals already use rather than requiring new workflows.",
     sources: [
       { label: "@swyx — AI Engineer perspective", url: "https://x.com/swyx", platform: "x" },
       { label: "Cursor Changelog", url: "https://cursor.com/changelog", platform: "blog" },
@@ -47,6 +47,29 @@ export const aiUpdates: AIUpdate[] = [
     ],
     date: "2026-02-11",
     tags: ["developer tools", "IDE", "productivity"],
+    tutorialContent: {
+      introduction: "AI-native IDEs are transforming how developers write code. This guide walks through setting up Cursor's agent mode for maximum productivity — from configuration to advanced workflows.",
+      videoUrl: "https://www.youtube.com/watch?v=gqUQbjsYZLQ",
+      steps: [
+        {
+          title: "Install and Configure Cursor",
+          content: "Download Cursor from cursor.com. Import your VS Code settings and extensions. Enable agent mode in Settings → Features → Agent. Set your preferred model (Claude Sonnet recommended for code generation, GPT-5 for complex reasoning tasks)."
+        },
+        {
+          title: "Master the Composer Workflow",
+          content: "Use Cmd+I to open the composer. Write natural language descriptions of what you want to build. Key technique: be specific about file paths, function names, and expected behavior. The more context you provide, the better the output."
+        },
+        {
+          title: "Use @-mentions for Context",
+          content: "Reference files with @filename, documentation with @docs, and codebase context with @codebase. This dramatically improves output quality by giving the model the right context window. Pro tip: pin frequently used files to your context."
+        },
+        {
+          title: "Set Up Custom Rules",
+          content: "Create a .cursorrules file in your project root. Define your coding standards, preferred patterns, and tech stack. Example: 'Always use TypeScript strict mode. Prefer functional components. Use Tailwind for styling.' This ensures consistent output across sessions."
+        }
+      ],
+      conclusion: "The key insight: AI IDEs don't replace programming knowledge — they amplify it. Developers who understand architecture and design patterns get exponentially more value from these tools than those who treat them as code generators."
+    }
   },
   {
     id: "3",
@@ -121,7 +144,7 @@ export const aiUpdates: AIUpdate[] = [
     id: "6",
     category: "tool",
     title: "MCP Protocol: The Emerging Standard for AI Tool Integration",
-    summary: "Anthropic's Model Context Protocol is becoming the de facto standard for connecting AI models to external tools and data sources. The strategic read: whoever controls the integration protocol controls the ecosystem. MCP's open design is a deliberate play to prevent OpenAI's function-calling format from becoming the locked-in standard. Watch for adoption patterns — they predict future platform dynamics.",
+    summary: "Anthropic's Model Context Protocol is becoming the de facto standard for connecting AI models to external tools and data sources. MCP's open design is a deliberate play to prevent OpenAI's function-calling format from becoming the locked-in standard.",
     sources: [
       { label: "Anthropic — MCP Specification", url: "https://modelcontextprotocol.io/", platform: "blog" },
       { label: "@alexalbert__ — MCP design decisions", url: "https://x.com/alexalbert__", platform: "x" },
@@ -129,5 +152,28 @@ export const aiUpdates: AIUpdate[] = [
     ],
     date: "2026-02-07",
     tags: ["protocols", "integration", "Anthropic"],
+    tutorialContent: {
+      introduction: "MCP lets you connect any AI model to external tools — databases, APIs, file systems — through a standardized protocol. This tutorial shows you how to build your first MCP server and connect it to Claude Desktop.",
+      videoUrl: "https://www.youtube.com/watch?v=kQHBJFNGnOA",
+      steps: [
+        {
+          title: "Understand the MCP Architecture",
+          content: "MCP follows a client-server model. The 'host' (e.g., Claude Desktop) connects to MCP 'servers' that expose tools. Each server defines capabilities: tools (actions), resources (data), and prompts (templates). Think of it as USB-C for AI — one standard connector for everything."
+        },
+        {
+          title: "Build a Simple MCP Server",
+          content: "Use the official TypeScript SDK: npm install @modelcontextprotocol/sdk. Create a server that exposes a single tool — for example, a weather lookup. Define the tool schema with name, description, and input parameters using JSON Schema. Return structured results."
+        },
+        {
+          title: "Connect to Claude Desktop",
+          content: "Add your server to Claude Desktop's config at ~/Library/Application Support/Claude/claude_desktop_config.json. Specify the command to run your server (e.g., 'npx your-mcp-server'). Restart Claude Desktop — your tool appears automatically in the interface."
+        },
+        {
+          title: "Add Resources and Context",
+          content: "Beyond tools, expose resources — structured data your AI can read. Example: expose your project's README, database schema, or API docs as MCP resources. This gives the model rich context without you having to paste it into every conversation."
+        }
+      ],
+      conclusion: "MCP is still early but the adoption curve is steep. Building MCP servers now is like building REST APIs in 2010 — the pattern will become ubiquitous. Start small, ship one server, and iterate."
+    }
   },
 ];
