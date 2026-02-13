@@ -71,19 +71,18 @@ const AIUpdateDetail = () => {
         <article className="space-y-10">
           {/* Video embed */}
           {tc.videoUrl && (
-            <div className="border border-border rounded overflow-hidden bg-card">
-              <a
-                href={tc.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 py-16 hover:bg-secondary/30 transition-colors group"
-              >
-                <Play className="w-8 h-8 text-champagne group-hover:scale-110 transition-transform" />
-                <span className="font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                  Watch tutorial video
-                </span>
-              </a>
-            </div>
+            <a
+              href={tc.videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 border border-border rounded bg-card p-6 hover:border-champagne-dim/40 transition-colors group"
+            >
+              <Play className="w-6 h-6 text-champagne group-hover:scale-110 transition-transform" />
+              <div>
+                <p className="text-sm font-mono text-foreground group-hover:text-champagne transition-colors">Watch tutorial video</p>
+                <p className="text-[10px] text-muted-foreground mt-0.5">Opens in YouTube</p>
+              </div>
+            </a>
           )}
 
           {/* Introduction */}
