@@ -35,10 +35,7 @@ const Index = () => {
              Become<br />
              <em className="text-champagne">Deliberately</em> Educated
            </h1>
-          <p className="text-sm sm:text-base text-foreground/60 leading-relaxed max-w-lg mx-auto mb-12 opacity-0 animate-fade-in" style={{ animationDelay: "200ms" }}>Structured, high-signal curation across money, power, geopolitics, career strategy, technology, and self-mastery.
-Independent judgment through first-principles analysis.
-            <br />
-            Independent judgment through first-principles analysis.
+           <p className="text-sm sm:text-base text-foreground/60 leading-relaxed max-w-lg mx-auto mb-12 opacity-0 animate-fade-in" style={{ animationDelay: "200ms" }}>Structured, high-signal curation across money, power, geopolitics, career strategy, technology, and self-mastery. Independent judgment through first-principles analysis.
           </p>
           <div className="flex items-center justify-center gap-4 opacity-0 animate-fade-in" style={{ animationDelay: "300ms" }}>
             <a
