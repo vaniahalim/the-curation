@@ -44,12 +44,6 @@ const Index = () => {
 
               Today's Briefing
             </a>
-            <Link
-              to="/pillars"
-              className="border border-border text-foreground/70 px-7 py-2.5 rounded text-sm font-medium hover:bg-secondary hover:text-foreground transition-colors tracking-wide">
-
-              Explore Pillars
-            </Link>
           </div>
         </div>
         <a
