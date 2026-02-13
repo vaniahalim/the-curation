@@ -3,6 +3,7 @@ import { BookOpen, Compass, LayoutDashboard, Cpu } from "lucide-react";
 
 const navItems = [
   { path: "/", label: "Home", icon: LayoutDashboard },
+  { path: "/today", label: "Today", icon: Compass },
   { path: "/pillars", label: "Pillars", icon: Compass },
   { path: "/ai-updates", label: "AI Updates", icon: Cpu },
   { path: "/library", label: "Library", icon: BookOpen },
