@@ -31,10 +31,10 @@ const Index = () => {
           <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-champagne mb-8 opacity-0 animate-fade-in">
             Strategic Intelligence
           </p>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif leading-[1.05] mb-8 opacity-0 animate-fade-in" style={{ animationDelay: "100ms" }}>
-            Become<br />
-            <em className="text-champagne">Dangerously</em> Educated
-          </h1>
+           <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif leading-[1.05] mb-8 opacity-0 animate-fade-in" style={{ animationDelay: "100ms" }}>
+             Strategic Intelligence<br />
+             <em className="text-champagne">Curation</em>
+           </h1>
           <p className="text-sm sm:text-base text-foreground/60 leading-relaxed max-w-lg mx-auto mb-12 opacity-0 animate-fade-in" style={{ animationDelay: "200ms" }}>Structured, high-signal curation across money, power, geopolitics, career strategy, technology, and self-mastery.
 Independent judgment through first-principles analysis.
             <br />
