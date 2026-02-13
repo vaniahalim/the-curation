@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import { pillarMeta, type PillarKey } from "@/data/dailyIntel";
-import { DollarSign, Building2, Globe, TrendingUp, Cpu, Target } from "lucide-react";
+import { getBriefsByPillar, dailyArchive } from "@/data/dailyArchive";
+import { DollarSign, Building2, Globe, TrendingUp, Cpu, Target, Calendar, ArrowRight } from "lucide-react";
 
 const pillarIcons: Record<PillarKey, React.ElementType> = {
   money: DollarSign, power: Building2, world: Globe,
@@ -78,6 +80,7 @@ const Pillars = () => {
           const meta = pillarMeta[key];
           const Icon = pillarIcons[key];
           const items = pillarDescriptions[key];
+          const recentBriefs = getBriefsByPillar(key).slice(0, 7);
 
           return (
             <div
@@ -95,7 +98,7 @@ const Pillars = () => {
                   <p className="text-xs text-muted-foreground">{meta.subtitle}</p>
                 </div>
               </div>
-              <ul className="space-y-2">
+              <ul className="space-y-2 mb-5">
                 {items.map((item, j) => (
                   <li key={j} className="flex items-start gap-2 text-sm text-foreground/65">
                     <span className="text-champagne mt-1 text-xs">▸</span>
@@ -103,9 +106,49 @@ const Pillars = () => {
                   </li>
                 ))}
               </ul>
+
+              {/* Recent briefs for this pillar */}
+              {recentBriefs.length > 0 && (
+                <div className="border-t border-border pt-4">
+                  <p className="text-[10px] font-mono tracking-widest uppercase text-champagne-dim mb-3">
+                    Recent Briefs
+                  </p>
+                  <div className="space-y-2">
+                    {recentBriefs.map((entry) => (
+                      <Link
+                        key={entry.date}
+                        to={`/daily-archive/${entry.date}`}
+                        className="flex items-start gap-2 group"
+                      >
+                        <Calendar className="w-3 h-3 text-muted-foreground mt-0.5 shrink-0 group-hover:text-champagne transition-colors" />
+                        <div className="min-w-0">
+                          <p className="text-sm text-foreground/75 group-hover:text-champagne transition-colors leading-snug truncate">
+                            {entry.brief.headline}
+                          </p>
+                          <p className="text-[10px] text-muted-foreground font-mono mt-0.5">
+                            {entry.dateLabel}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           );
         })}
+      </div>
+
+      {/* Full Archive Link */}
+      <div className="mt-10 text-center">
+        <Link
+          to="/daily-archive"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-champagne transition-colors group"
+        >
+          <Calendar className="w-4 h-4" />
+          Browse full briefing archive
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+        </Link>
       </div>
     </div>
   );

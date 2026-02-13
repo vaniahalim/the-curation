@@ -9,6 +9,7 @@ import Pillars from "./pages/Pillars";
 import Library from "./pages/Library";
 import AIUpdates from "./pages/AIUpdates";
 import AIUpdateDetail from "./pages/AIUpdateDetail";
+import DailyArchive from "./pages/DailyArchive";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,8 @@ const App = () => (
             <Route path="/pillars" element={<Pillars />} />
             <Route path="/ai-updates" element={<AIUpdates />} />
             <Route path="/ai-updates/:id" element={<AIUpdateDetail />} />
+            <Route path="/daily-archive" element={<DailyArchive />} />
+            <Route path="/daily-archive/:date" element={<DailyArchive />} />
             <Route path="/library" element={<Library />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
