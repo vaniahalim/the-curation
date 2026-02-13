@@ -136,14 +136,14 @@ const Index = () => {
           </p>
           <div className="flex items-center justify-center gap-4">
             <Link
+              to="/ai-updates"
+              className="inline-block bg-primary text-primary-foreground px-7 py-2.5 rounded text-sm font-medium hover:opacity-90 transition-opacity tracking-wide">
+              AI Updates
+            </Link>
+            <Link
               to="/library"
               className="inline-block bg-primary text-primary-foreground px-7 py-2.5 rounded text-sm font-medium hover:opacity-90 transition-opacity tracking-wide">
               Browse the Library
-            </Link>
-            <Link
-              to="/ai-updates"
-              className="inline-block border border-border text-foreground/70 px-7 py-2.5 rounded text-sm font-medium hover:bg-secondary hover:text-foreground transition-colors tracking-wide">
-              AI Updates
             </Link>
           </div>
         </div>
