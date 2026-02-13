@@ -99,40 +99,15 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Daily Intel */}
-      <section id="daily-intel" className="max-w-6xl mx-auto px-6 py-24">
-        <div className="mb-12">
-          <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-champagne mb-3">
-            Daily Intel
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-serif mb-3">
-            Today's Strategic Briefing
-          </h2>
-          <p className="text-xs text-muted-foreground font-mono tracking-wide">{today}</p>
-        </div>
-
-        <div className="border-l border-champagne-dim/40 pl-5 mb-12">
-          <p className="text-sm text-foreground/60 leading-relaxed max-w-2xl">
-            Six high-signal briefings with multi-source citations. Each includes context,
-            incentive analysis, what most people are missing, and long-term implications.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          {todayIntel.map((brief, i) =>
-          <IntelCard key={brief.pillar} brief={brief} index={i} />
-          )}
-        </div>
-      </section>
 
       {/* CTA */}
       <section className="border-t border-border py-20">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <h2 className="text-2xl font-serif mb-4">Go Deeper</h2>
           <p className="text-sm text-muted-foreground mb-8">
+            AI updates — emerging models, tools, and practical tutorials to stay ahead of the curve.<br />
             The curated library — books, podcasts, and documentaries with bias profiles,
-            reading lenses, and extracted key takeaways.<br />
-            AI updates — emerging models, tools, and practical tutorials to stay ahead of the curve.
+            reading lenses, and extracted key takeaways.
           </p>
           <div className="flex items-center justify-center gap-4">
             <Link
