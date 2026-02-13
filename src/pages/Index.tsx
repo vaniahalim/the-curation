@@ -7,13 +7,13 @@ import { ArrowDown, DollarSign, Building2, Globe, TrendingUp, Cpu, Target } from
 
 const pillarIcons: Record<PillarKey, React.ElementType> = {
   money: DollarSign, power: Building2, world: Globe,
-  career: TrendingUp, tech: Cpu, self: Target,
+  career: TrendingUp, tech: Cpu, self: Target
 };
 
 const pillarColors: Record<PillarKey, string> = {
   money: "pillar-indicator-money", power: "pillar-indicator-power",
   world: "pillar-indicator-world", career: "pillar-indicator-career",
-  tech: "pillar-indicator-tech", self: "pillar-indicator-self",
+  tech: "pillar-indicator-tech", self: "pillar-indicator-self"
 };
 
 const Index = () => {
@@ -35,30 +35,30 @@ const Index = () => {
             Become<br />
             <em className="text-champagne">Dangerously</em> Educated
           </h1>
-          <p className="text-sm sm:text-base text-foreground/60 leading-relaxed max-w-lg mx-auto mb-12 opacity-0 animate-fade-in" style={{ animationDelay: "200ms" }}>
-            Structured, high-signal education across money, power, geopolitics,
-            career strategy, technology, and self-mastery.<br />
+          <p className="text-sm sm:text-base text-foreground/60 leading-relaxed max-w-lg mx-auto mb-12 opacity-0 animate-fade-in" style={{ animationDelay: "200ms" }}>Structured, high-signal curation across money, power, geopolitics, career strategy, technology, and self-mastery.
+Independent judgment through first-principles analysis.
+            <br />
             Independent judgment through first-principles analysis.
           </p>
           <div className="flex items-center justify-center gap-4 opacity-0 animate-fade-in" style={{ animationDelay: "300ms" }}>
             <a
               href="#daily-intel"
-              className="bg-primary text-primary-foreground px-7 py-2.5 rounded text-sm font-medium hover:opacity-90 transition-opacity tracking-wide"
-            >
+              className="bg-primary text-primary-foreground px-7 py-2.5 rounded text-sm font-medium hover:opacity-90 transition-opacity tracking-wide">
+
               Today's Briefing
             </a>
             <Link
               to="/pillars"
-              className="border border-border text-foreground/70 px-7 py-2.5 rounded text-sm font-medium hover:bg-secondary hover:text-foreground transition-colors tracking-wide"
-            >
+              className="border border-border text-foreground/70 px-7 py-2.5 rounded text-sm font-medium hover:bg-secondary hover:text-foreground transition-colors tracking-wide">
+
               Explore Pillars
             </Link>
           </div>
         </div>
         <a
           href="#pillars-overview"
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-foreground transition-colors"
-        >
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-foreground transition-colors">
+
           <ArrowDown className="w-4 h-4 animate-bounce" />
         </a>
       </section>
@@ -80,16 +80,16 @@ const Index = () => {
                 to="/pillars"
                 key={key}
                 className="border border-border rounded bg-card p-5 opacity-0 animate-fade-in hover:border-champagne-dim/40 transition-colors group"
-                style={{ animationDelay: `${i * 80}ms` }}
-              >
+                style={{ animationDelay: `${i * 80}ms` }}>
+
                 <div className="flex items-center gap-2.5 mb-3">
                   <div className={`w-1.5 h-1.5 rounded-full ${pillarColors[key]}`} />
                   <Icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
                 </div>
                 <h3 className="font-serif text-base sm:text-lg mb-1 leading-snug">{meta.label}</h3>
                 <p className="text-xs text-muted-foreground hidden sm:block">{meta.subtitle}</p>
-              </Link>
-            );
+              </Link>);
+
           })}
         </div>
       </section>
@@ -128,9 +128,9 @@ const Index = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          {todayIntel.map((brief, i) => (
-            <IntelCard key={brief.pillar} brief={brief} index={i} />
-          ))}
+          {todayIntel.map((brief, i) =>
+          <IntelCard key={brief.pillar} brief={brief} index={i} />
+          )}
         </div>
       </section>
 
@@ -144,14 +144,14 @@ const Index = () => {
           </p>
           <Link
             to="/library"
-            className="inline-block bg-primary text-primary-foreground px-7 py-2.5 rounded text-sm font-medium hover:opacity-90 transition-opacity tracking-wide"
-          >
+            className="inline-block bg-primary text-primary-foreground px-7 py-2.5 rounded text-sm font-medium hover:opacity-90 transition-opacity tracking-wide">
+
             Browse the Library
           </Link>
         </div>
       </section>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Index;
