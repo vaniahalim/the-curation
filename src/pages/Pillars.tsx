@@ -14,49 +14,13 @@ const pillarColors: Record<PillarKey, string> = {
   tech: "pillar-indicator-tech", self: "pillar-indicator-self",
 };
 
-const pillarDescriptions: Record<PillarKey, string[]> = {
-  money: [
-    "How monetary systems function and who they serve",
-    "Capital vs labor dynamics and wealth transfer mechanisms",
-    "Inflation, credit cycles, and asset class behavior",
-    "Risk, optionality, and the mathematics of compounding",
-    "Personal wealth architecture: assets, income streams, risk exposure",
-  ],
-  power: [
-    "How institutions behave under constraints",
-    "Regulatory capture as equilibrium, not exception",
-    "Political economy and elite coalition management",
-    "Power concentration in platforms and capital markets",
-    "Gap between public narratives and operative incentives",
-  ],
-  world: [
-    "Interpreting global events through incentive structures",
-    "Geopolitical shifts and supply chain power maps",
-    "Institutional strategy behind headlines",
-    "Second-order consequences of policy changes",
-    "Detecting narrative framing across regional perspectives",
-  ],
-  career: [
-    "Career capital accumulation and leverage points",
-    "High-leverage skill combinations vs credential stacking",
-    "Optionality mapping across institutional and entrepreneurial paths",
-    "Prestige traps and the cost of legibility",
-    "Network strategy and positioning in nascent markets",
-  ],
-  tech: [
-    "AI deployment realities vs hype cycles",
-    "Compute constraints and energy infrastructure",
-    "Regulatory fragmentation: EU AI Act, US executive orders, China's approach",
-    "Open vs closed ecosystem incentives",
-    "Ethics as governance architecture, not sentiment",
-  ],
-  self: [
-    "Identity-based discipline over willpower",
-    "Energy management and environmental design",
-    "10-year time horizons as competitive advantage",
-    "Standards in relationships and environments",
-    "Compounding applied beyond finance",
-  ],
+const pillarDescriptions: Record<PillarKey, string> = {
+  money: "Capital flows, monetary systems, and wealth architecture",
+  power: "Institutional incentives, regulatory capture, and elite dynamics",
+  world: "Geopolitical strategy and second-order effects behind headlines",
+  career: "Leverage points, skill stacking, and optionality mapping",
+  tech: "AI infrastructure, compute constraints, and governance fragmentation",
+  self: "Long-horizon discipline, identity design, and compounding beyond finance",
 };
 
 const Pillars = () => {
@@ -79,8 +43,8 @@ const Pillars = () => {
         {keys.map((key, i) => {
           const meta = pillarMeta[key];
           const Icon = pillarIcons[key];
-          const items = pillarDescriptions[key];
-          const recentBriefs = getBriefsByPillar(key).slice(0, 7);
+          const description = pillarDescriptions[key];
+          const recentBriefs = getBriefsByPillar(key).slice(0, 3);
 
           return (
             <div
@@ -88,24 +52,14 @@ const Pillars = () => {
               className="border border-border rounded bg-card p-6 opacity-0 animate-fade-in hover:border-champagne-dim/40 transition-colors"
               style={{ animationDelay: `${i * 80}ms` }}
             >
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="flex items-center gap-2">
                   <div className={`w-2 h-2 rounded-full ${pillarColors[key]}`} />
                   <Icon className="w-4 h-4 text-muted-foreground" />
                 </div>
-                <div>
-                  <h3 className="font-serif text-lg leading-tight">{meta.label}</h3>
-                  <p className="text-xs text-muted-foreground">{meta.subtitle}</p>
-                </div>
+                <h3 className="font-serif text-lg leading-tight">{meta.label}</h3>
               </div>
-              <ul className="space-y-2 mb-5">
-                {items.map((item, j) => (
-                  <li key={j} className="flex items-start gap-2 text-sm text-foreground/65">
-                    <span className="text-champagne mt-1 text-xs">▸</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <p className="text-sm text-foreground/60 mb-4">{description}</p>
 
               {/* Recent briefs for this pillar */}
               {recentBriefs.length > 0 && (
