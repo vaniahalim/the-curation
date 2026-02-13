@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { BookOpen, Compass, LayoutDashboard, Cpu } from "lucide-react";
+import FontSizeControl from "./FontSizeControl";
 
 const navItems = [
   { path: "/", label: "Home", icon: LayoutDashboard },
@@ -40,6 +41,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
               );
             })}
+            <div className="ml-2 border-l border-border pl-2">
+              <FontSizeControl />
+            </div>
           </nav>
         </div>
       </header>
