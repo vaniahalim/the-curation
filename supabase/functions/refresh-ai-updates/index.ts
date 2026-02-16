@@ -1,5 +1,18 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://esm.sh/zod@3.25.76";
+
+const AIUpdateSchema = z.object({
+  category: z.string().min(1).max(50),
+  title: z.string().min(1).max(200),
+  summary: z.string().min(1).max(5000),
+  sources: z.array(z.object({
+    label: z.string().min(1).max(200),
+    url: z.string().url(),
+    platform: z.enum(["x", "substack", "blog", "paper", "youtube"]),
+  })).default([]),
+  tags: z.array(z.string().max(50)).default([]),
+});
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -121,21 +134,26 @@ Return ONLY a JSON array. No markdown wrapping. Use real, verifiable sources and
 
       try {
         const jsonStr = content.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
-        const parsed = JSON.parse(jsonStr);
-        const items = Array.isArray(parsed) ? parsed : [parsed];
+        const rawParsed = JSON.parse(jsonStr);
+        const items = Array.isArray(rawParsed) ? rawParsed : [rawParsed];
 
         for (const item of items) {
-          updates.push({
-            category: cat.key,
-            title: item.title,
-            summary: item.summary,
-            sources: item.sources || [],
-            tags: item.tags || [],
-            published_date: today,
-          });
+          try {
+            const validated = AIUpdateSchema.parse(item);
+            updates.push({
+              category: cat.key,
+              title: validated.title,
+              summary: validated.summary,
+              sources: validated.sources,
+              tags: validated.tags,
+              published_date: today,
+            });
+          } catch (itemErr) {
+            console.error(`Item validation error for ${cat.key}:`, itemErr instanceof z.ZodError ? itemErr.issues : itemErr);
+          }
         }
       } catch (parseErr) {
-        console.error(`JSON parse error for ${cat.key}:`, parseErr, content);
+        console.error(`JSON parse error for ${cat.key}:`, parseErr);
       }
     }
 
