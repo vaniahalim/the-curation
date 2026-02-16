@@ -1,5 +1,18 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://esm.sh/zod@3.25.76";
+
+const BriefingSchema = z.object({
+  headline: z.string().min(1).max(200),
+  briefing: z.string().min(1).max(5000),
+  sources: z.array(z.object({
+    label: z.string().min(1).max(200),
+    url: z.string().url(),
+    type: z.enum(["report", "analysis", "data", "opinion", "policy", "academic"]),
+  })).default([]),
+  question: z.string().min(1).max(1000),
+  reflection: z.string().min(1).max(1000),
+});
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -125,20 +138,20 @@ Focus on what happened in the last 24-48 hours. Be specific, cite real events an
 
       try {
         const jsonStr = content.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
-        const parsed = JSON.parse(jsonStr);
+        const parsed = BriefingSchema.parse(JSON.parse(jsonStr));
 
         briefings.push({
           pillar: pillar.key,
           pillar_label: pillar.label,
           headline: parsed.headline,
           briefing: parsed.briefing,
-          sources: parsed.sources || [],
+          sources: parsed.sources,
           question: parsed.question,
           reflection: parsed.reflection,
           briefing_date: today,
         });
       } catch (parseErr) {
-        console.error(`JSON parse error for ${pillar.key}:`, parseErr, content);
+        console.error(`Validation/parse error for ${pillar.key}:`, parseErr instanceof z.ZodError ? parseErr.issues : parseErr);
       }
     }
 
