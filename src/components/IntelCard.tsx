@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { type IntelBrief, type PillarKey, type SourceLink } from "@/data/dailyIntel";
 import { ExternalLink, MessageCircle, Lightbulb, ChevronDown } from "lucide-react";
+import type { DailyBriefing } from "@/hooks/useDailyBriefings";
 
-const pillarColors: Record<PillarKey, string> = {
+const pillarColors: Record<string, string> = {
   money: "pillar-indicator-money",
   power: "pillar-indicator-power",
   world: "pillar-indicator-world",
@@ -11,7 +11,7 @@ const pillarColors: Record<PillarKey, string> = {
   self: "pillar-indicator-self",
 };
 
-const IntelCard = ({ brief, index }: { brief: IntelBrief; index: number }) => {
+const IntelCard = ({ brief, index }: { brief: DailyBriefing; index: number }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -19,23 +19,16 @@ const IntelCard = ({ brief, index }: { brief: IntelBrief; index: number }) => {
       className="border border-border rounded bg-card p-6 opacity-0 animate-fade-in hover:border-champagne-dim/40 transition-colors duration-300"
       style={{ animationDelay: `${index * 100}ms` }}
     >
-      {/* Pillar tag */}
       <div className="flex items-center gap-2 mb-3">
-        <div className={`w-1.5 h-1.5 rounded-full ${pillarColors[brief.pillar]}`} />
+        <div className={`w-1.5 h-1.5 rounded-full ${pillarColors[brief.pillar] || ""}`} />
         <span className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground">
-          {brief.pillarLabel}
+          {brief.pillar_label}
         </span>
       </div>
 
-      {/* Headline */}
       <h3 className="font-serif text-xl mb-3 leading-snug">{brief.headline}</h3>
+      <p className="text-sm leading-relaxed text-foreground/75 mb-4">{brief.briefing}</p>
 
-      {/* Brief summary */}
-      <p className="text-sm leading-relaxed text-foreground/75 mb-4">
-        {brief.briefing}
-      </p>
-
-      {/* Expand toggle */}
       <button
         onClick={() => setExpanded(!expanded)}
         className="flex items-center gap-1.5 text-[10px] font-mono tracking-widest uppercase text-champagne-dim hover:text-champagne transition-colors mb-1"
@@ -44,10 +37,8 @@ const IntelCard = ({ brief, index }: { brief: IntelBrief; index: number }) => {
         <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
       </button>
 
-      {/* Collapsible details */}
       {expanded && (
         <div className="mt-4 space-y-4 animate-fade-in">
-          {/* Sources */}
           <div>
             <p className="text-[10px] font-mono tracking-widest uppercase text-champagne-dim mb-2">Sources</p>
             <div className="flex flex-wrap gap-x-4 gap-y-1.5">
@@ -65,8 +56,6 @@ const IntelCard = ({ brief, index }: { brief: IntelBrief; index: number }) => {
               ))}
             </div>
           </div>
-
-          {/* Question & Reflection */}
           <div className="border-t border-border pt-4 space-y-3">
             <div className="flex items-start gap-2">
               <MessageCircle className="w-3.5 h-3.5 text-champagne mt-0.5 shrink-0" />
