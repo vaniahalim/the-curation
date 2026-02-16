@@ -1,1 +1,7 @@
 project_id = "bpewduomxcgqxsugrign"
+
+[functions.refresh-briefings]
+verify_jwt = false
+
+[functions.refresh-ai-updates]
+verify_jwt = false

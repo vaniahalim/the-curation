@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { pillarMeta, type PillarKey } from "@/data/dailyIntel";
-import { getBriefsByPillar, dailyArchive } from "@/data/dailyArchive";
-import { DollarSign, Building2, Globe, TrendingUp, Cpu, Target, Calendar, ArrowRight } from "lucide-react";
+import { DollarSign, Building2, Globe, TrendingUp, Cpu, Target, Calendar, ArrowRight, Loader2 } from "lucide-react";
+import { format, parseISO } from "date-fns";
 
 const pillarIcons: Record<PillarKey, React.ElementType> = {
   money: DollarSign, power: Building2, world: Globe,
@@ -26,6 +28,24 @@ const pillarDescriptions: Record<PillarKey, string> = {
 const Pillars = () => {
   const keys = Object.keys(pillarMeta) as PillarKey[];
 
+  const { data: recentBriefings } = useQuery({
+    queryKey: ["recent-briefings-by-pillar"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("daily_briefings")
+        .select("pillar, headline, briefing_date")
+        .order("briefing_date", { ascending: false })
+        .limit(50);
+      if (error) throw error;
+      return data as { pillar: string; headline: string; briefing_date: string }[];
+    },
+  });
+
+  const getBriefsByPillar = (pillar: string) => {
+    if (!recentBriefings) return [];
+    return recentBriefings.filter((b) => b.pillar === pillar).slice(0, 3);
+  };
+
   return (
     <div>
       <div className="mb-12">
@@ -44,7 +64,7 @@ const Pillars = () => {
           const meta = pillarMeta[key];
           const Icon = pillarIcons[key];
           const description = pillarDescriptions[key];
-          const recentBriefs = getBriefsByPillar(key).slice(0, 3);
+          const briefs = getBriefsByPillar(key);
 
           return (
             <div
@@ -61,26 +81,25 @@ const Pillars = () => {
               </div>
               <p className="text-sm text-foreground/60 mb-4">{description}</p>
 
-              {/* Recent briefs for this pillar */}
-              {recentBriefs.length > 0 && (
+              {briefs.length > 0 && (
                 <div className="border-t border-border pt-4">
                   <p className="text-[10px] font-mono tracking-widest uppercase text-champagne-dim mb-3">
                     Recent Briefs
                   </p>
                   <div className="space-y-2">
-                    {recentBriefs.map((entry) => (
+                    {briefs.map((entry) => (
                       <Link
-                        key={entry.date}
-                        to={`/daily-archive/${entry.date}`}
+                        key={entry.briefing_date + entry.headline}
+                        to={`/daily-archive/${entry.briefing_date}`}
                         className="flex items-start gap-2 group"
                       >
                         <Calendar className="w-3 h-3 text-muted-foreground mt-0.5 shrink-0 group-hover:text-champagne transition-colors" />
                         <div className="min-w-0">
                           <p className="text-sm text-foreground/75 group-hover:text-champagne transition-colors leading-snug truncate">
-                            {entry.brief.headline}
+                            {entry.headline}
                           </p>
                           <p className="text-[10px] text-muted-foreground font-mono mt-0.5">
-                            {entry.dateLabel}
+                            {format(parseISO(entry.briefing_date), "MMM d, yyyy")}
                           </p>
                         </div>
                       </Link>
@@ -93,7 +112,6 @@ const Pillars = () => {
         })}
       </div>
 
-      {/* Full Archive Link */}
       <div className="mt-10 text-center">
         <Link
           to="/daily-archive"
