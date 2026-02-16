@@ -38,12 +38,11 @@ const Index = () => {
            <p className="text-sm sm:text-base text-foreground/60 leading-relaxed max-w-lg mx-auto mb-12 opacity-0 animate-fade-in" style={{ animationDelay: "200ms" }}>Structured, high-signal curation across money, power, geopolitics, career strategy, technology, and self-mastery.
           </p>
           <div className="flex items-center justify-center gap-4 opacity-0 animate-fade-in" style={{ animationDelay: "300ms" }}>
-            <a
-              href="#daily-intel"
+            <Link
+              to="/today"
               className="bg-primary text-primary-foreground px-7 py-2.5 rounded text-sm font-medium hover:opacity-90 transition-opacity tracking-wide">
-
               Today's Briefing
-            </a>
+            </Link>
           </div>
         </div>
         <a
